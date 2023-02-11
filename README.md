@@ -1,5 +1,4 @@
-# Standard Project
-MouseMApp Website
+# MouseMApp Website
 
 ## About
 
