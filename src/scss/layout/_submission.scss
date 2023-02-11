@@ -1,0 +1,81 @@
+.submission {
+
+    .section-inner {
+        padding-bottom: 64px;
+    }
+
+    .section-paragraph {
+        margin-bottom: 32px;
+    }
+}
+
+.submission-loader {
+    svg {
+        margin: 40px auto;
+    }
+} 
+
+.submission-form {
+    max-width: 475px;
+    margin: 0 auto;
+
+    .control {
+        margin-bottom: 20px;
+
+        .file-upload {
+            display: block;
+            text-align: left;
+        }
+
+        input#file-input[type="file"] {
+            // visibility: hidden;
+            // width: 0;
+            // height: 0;
+            display: none;
+        }
+    }
+}
+
+.submission-result {
+    dl {
+        padding: 0.5em;
+
+        dt {
+            float: left;
+            clear: left;
+            width: 45%;
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        dt::after {
+            content: ":";
+        }
+        
+        dd {
+            margin: 0 0 0 55%;
+            padding: 0 0 0.5em 0;
+            text-align: left;
+        }
+    }
+    
+    button {
+        margin: 0 auto;
+    }
+}
+
+@include media( '>medium' ) {
+
+    .submission {
+
+        .section-inner {
+            padding-bottom: 120px;
+        }
+
+        .section-paragraph {
+            margin-bottom: 40px;
+            padding-left: 72px;
+            padding-right: 72px;
+        }
+    }
+}

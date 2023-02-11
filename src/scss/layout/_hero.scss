@@ -10,16 +10,18 @@
 
 .hero-browser {
     position: relative;
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .hero-browser-inner {
     position: relative; /* To display bubbles below the browser */
 
-    svg {
-        width: 100%;
-        height: auto;
-        overflow: visible;
+    .submission-form-wrapper {
+        width: 800px;
+        min-height: 450px;
+        padding: 40px;
+        box-shadow: 0 16px 48px #e3e7eb;
+        background-color: white;
     }
 }
 
