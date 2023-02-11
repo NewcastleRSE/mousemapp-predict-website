@@ -3,16 +3,12 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - dev  # Set a branch name to trigger deployment
+      - dev
   pull_request:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
 
@@ -20,11 +16,6 @@ jobs:
         uses: actions/setup-node@v2.1.2
         with:
           node-version: 16
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '3.0.100'
 
       - name: Install Dependencies
         run: yarn install
