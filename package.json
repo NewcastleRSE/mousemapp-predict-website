@@ -27,8 +27,7 @@
     "watch:css": "onchange \"src/scss\" -- run-s build:css",
     "watch:js": "onchange \"src/js\" -- run-s build:js",
     "watch:images": "onchange \"src/images\" -- run-s build:images",
-    "watch": "run-p serve watch:*",
-    "postinstall": "run-s build watch"
+    "watch": "run-p serve watch:*"
   },
   "devDependencies": {
     "autoprefixer": "10.4.13",
@@ -50,9 +49,5 @@
     "uglify-es": "3.3.9"
   },
   "homepage": "https://github.com/NewcastleRSE/mousemapp-predict-website",
-  "main": ".eslintrc.js",
-  "dependencies": {
-    "@sentry/browser": "^7.37.1",
-    "@sentry/tracing": "^7.37.1"
-  }
+  "main": ".eslintrc.js"
 }
