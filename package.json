@@ -47,7 +47,5 @@
     "rimraf": "4.1.2",
     "stylelint": "15.0.0",
     "uglify-es": "3.3.9"
-  },
-  "homepage": "https://github.com/NewcastleRSE/mousemapp-predict-website",
-  "main": ".eslintrc.js"
+  }
 }
