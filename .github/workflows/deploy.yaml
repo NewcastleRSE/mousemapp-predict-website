@@ -27,7 +27,7 @@ jobs:
           dotnet-version: '3.0.100'
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --ignore-scripts
 
       - name: Generate Distribution
         run: yarn build

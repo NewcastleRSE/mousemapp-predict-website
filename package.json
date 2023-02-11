@@ -50,9 +50,5 @@
     "uglify-es": "3.3.9"
   },
   "homepage": "https://github.com/NewcastleRSE/mousemapp-predict-website",
-  "main": ".eslintrc.js",
-  "dependencies": {
-    "@sentry/browser": "^7.37.1",
-    "@sentry/tracing": "^7.37.1"
-  }
+  "main": ".eslintrc.js"
 }
