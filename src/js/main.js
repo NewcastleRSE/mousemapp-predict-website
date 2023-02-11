@@ -40,6 +40,8 @@ function callPredict(event) {
 }
 
 function reset() {
+  document.getElementById('file-label').textContent = 'Image'
+  document.getElementById('form').reset()
   document.getElementById('form').classList.toggle('hide')
   document.getElementById('result').classList.toggle('hide')
 }
