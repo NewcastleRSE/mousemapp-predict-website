@@ -1,212 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mouse MApp</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i|Roboto:500" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/style.css">
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-</head>
-<body class="is-boxed has-animations">
-    <div class="body-wrap boxed-container">
-        <header class="site-header">
-            <div class="container">
-                <div class="site-header-inner">
-                    <div class="brand header-brand">
-                        <h1 class="m-0">
-                            
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <section class="hero text-center">
-                <div class="container-sm">
-                    <div class="hero-inner">
-                        <h1 class="hero-title h2-mobile mt-0 is-revealing">Mouse MApp – Body Condition Scoring</h1>
-                        <p class="hero-paragraph is-revealing">An image classifier for the assessment of body condition (BCS) in mice</p>
-                        <div class="hero-browser">
-                            <div class="hero-browser-inner is-revealing">
-                                <div class="submission-form-wrapper">
-                                    <div id="predicting" class="submission-loader hide">
-                                        <svg width="85" height="85" viewBox="0 0 105 105" xmlns="http://www.w3.org/2000/svg" fill="#2e83ef">
-                                            <circle cx="12.5" cy="12.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="0s" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="12.5" cy="52.5" r="12.5" fill-opacity=".5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="100ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="52.5" cy="12.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="300ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="52.5" cy="52.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="600ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="92.5" cy="12.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="800ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="92.5" cy="52.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="400ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="12.5" cy="92.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="700ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="52.5" cy="92.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="500ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                            <circle cx="92.5" cy="92.5" r="12.5">
-                                                <animate attributeName="fill-opacity"
-                                                begin="200ms" dur="1s"
-                                                values="1;.2;1" calcMode="linear"
-                                                repeatCount="indefinite" />
-                                            </circle>
-                                        </svg>
-                                        <p>Calculating score, this may take several minutes.</p>
-                                    </div>
-                                    <div id="result" class="submission-result hide">
-                                        <h1 id="result-score">5</h1>
-                                        <dl>
-                                            <dt>Name</dt>
-                                            <dd id="result-name"></dd>
-                                            <dt>Room</dt>
-                                            <dd id="result-room"></dd>
-                                            <dt>Cage</dt>
-                                            <dd id="result-cage"></dd>
-                                            <dt>Mouse</dt>
-                                            <dd id="result-mouseID"></dd>
-                                            <dt>File</dt>
-                                            <dd id="result-file"></dd>
-                                        </dl>
-                                        <div class="control">
-                                            <button onclick="reset()" type="button" class="button button-primary button-block button-shadow">Done</button>
-                                        </div>
-                                    </div>
-                                    <form id="form" class="submission-form field is-revealing">
-                                        <h4>Instructions</h4>
-                                        <p>For each mouse enter your Name, Holding room ID, Cage ID & Mouse ID into the boxed below. You are able to upload up to three images of each mouse, with the system displaying an average score across all of the images uploaded.</p> 
-                                        <p>If you are able to add a score form manual palpation for the mouse, we can further develop the system & increase the accuracy. </p>
-                                        <p>For further information on Body Condition Score (BCS) method please see: BCS Guide</p>
-                                        <p>For detailed instructions for how to take optimal images please see: Image Guide</p>
-                                        <div class="control control-expanded">
-                                            <input class="input" type="text" name="name" placeholder="Observer Name" required>
-                                        </div>
-                                        <div class="control control-expanded">
-                                            <input class="input" type="text" name="room" placeholder="Room ID" required>
-                                        </div>
-                                        <div class="control control-expanded">
-                                            <input class="input" type="text" name="cage" placeholder="Cage ID" required>
-                                        </div>
-                                        <div class="control control-expanded">
-                                            <input class="input" type="text" name="mouseID" placeholder="Mouse ID" required>
-                                        </div>
-                                        <div class="control control-expanded">
-                                            <label id="file-label" class="input file-upload" for="file-input">Image</label>
-                                            <input id="file-input" type="file" name="files" multiple="multiple" required/>
-                                        </div>
-                                        <div class="control control-expanded">
-                                            <input class="input" type="text" name="palpation" placeholder="Palpation Score">
-                                        </div>
-                                        <div class="control">
-                                            <button type="submit" class="button button-primary button-block button-shadow">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="submission section">
-                <div class="container-sm">
-                    <div class="submission-inner section-inner">
-                        <div class="submission-header text-center is-revealing">
-                            <h2 class="section-title mt-0">Stay in the know</h2>
-                            <p class="section-paragraph">If you wish to find out more about this project, please contact Newcastle University Research Software Engineering.</p>
-                            <h4 class="section-title mt-0"><a href="mailto:rseteam@newcastle.ac.uk">rseteam@newcastle.ac.uk</a></h4>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="site-footer text-light">
-            <div class="container">
-                <div class="site-footer-inner">
-                    <div class="brand footer-brand">
-                        <a href="#">
-                            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <title>Ava</title>
-                                <defs>
-                                    <path d="M32 16H16v16H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h28a2 2 0 0 1 2 2v14z" id="logo-gradient-footer-a"/>
-                                    <linearGradient x1="50%" y1="50%" y2="100%" id="logo-gradient-footer-b">
-                                        <stop stop-color="#FFF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#FFF" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <mask id="logo-gradient-footer-c" fill="#fff">
-                                        <use xlink:href="#logo-gradient-footer-a"/>
-                                    </mask>
-                                    <use fill-opacity=".32" fill="#FFF" xlink:href="#logo-gradient-footer-a"/>
-                                    <path fill="url(#logo-gradient-footer-b)" mask="url(#logo-gradient-footer-c)" d="M-16-16h32v32h-32z"/>
-                                </g>
-                            </svg>
-
-                        </a>
-                    </div>
-                    <div class="footer-copyright">&copy; 2023 Newcastle University. Based on the Ava Theme</div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script src="dist/js/main.min.js"></script>
-    <script
-        src="https://browser.sentry-cdn.com/7.37.1/bundle.tracing.min.js"
-        integrity="sha384-1JKZyj097HID3/SGPzRlmpftSQF7R92wUqwgs4d+PVy/YtHxgNNVQOau9PS4tWFn"
-        crossorigin="anonymous"
-    ></script>
-    <script type="module">
-        // Only catch errors in production
-        if (window.location.hostname === "htandme.co.uk") {
-            Sentry.init({
-                dsn: "https://b09b80983a54445bbfa01657e146178a@o1080315.ingest.sentry.io/4504660631879680",
-                // Set tracesSampleRate to 1.0 to capture 100%
-                // of transactions for performance monitoring.
-                // We recommend adjusting this value in production
-                tracesSampleRate: 1.0,
-                environment: 'Production'
-            })
-        }
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/images/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MouseMApp</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+  <script type="module">
+    // Only catch errors in production
+    if (window.location.hostname === "htandme.co.uk") {
+        Sentry.init({
+            dsn: "https://b09b80983a54445bbfa01657e146178a@o1080315.ingest.sentry.io/4504660631879680",
+            // Set tracesSampleRate to 1.0 to capture 100%
+            // of transactions for performance monitoring.
+            // We recommend adjusting this value in production
+            tracesSampleRate: 1.0,
+            environment: 'Production'
+        })
+    }
+</script>
 </html>
