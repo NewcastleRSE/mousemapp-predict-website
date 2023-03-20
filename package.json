@@ -48,5 +48,8 @@
     "rimraf": "4.1.2",
     "stylelint": "15.0.0",
     "uglify-es": "3.3.9"
+  },
+  "dependencies": {
+    "jpegtran-bin": "^7.0.0"
   }
 }

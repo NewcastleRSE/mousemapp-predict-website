@@ -14,6 +14,8 @@
 .boxed-container {
     max-width: 1440px;
     margin: 50px auto;
+    background-image: url('/dist/images/mice.jpg');
+    background-size: cover;
     @include shadow;
 }
 
