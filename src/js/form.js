@@ -1,0 +1,135 @@
+export const form = `
+        <form id="form" class="space-y-8 divide-y divide-gray-200">
+          <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+            <div class="space-y-6 sm:space-y-5">
+              <div>
+                <h3 class="text-base font-semibold leading-6 text-gray-900">Instructions</h3>
+                <p class="mt-2 text-sm text-gray-500">For each mouse enter your Name, Holding room ID, Cage ID & Mouse ID into the boxed below. You are able to upload up to three images of each mouse, with the system displaying an average score across all of the images uploaded.</p>
+                <p class="mt-2 text-sm text-gray-500">If you are able to add a score form manual palpation for the mouse, we can further develop the system & increase the accuracy.</p>
+                <p class="mt-2 text-sm text-gray-500">For further information on Body Condition Score (BCS) method please see: BCS Guide</p>
+                <p class="mt-2 text-sm text-gray-500">For detailed instructions for how to take optimal images please see: Image Guide</p>
+              </div>
+
+            <div class="space-y-6 sm:space-y-5">
+              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="observerName" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Observer Name <span class="text-gray-400">(Optional)</span></label>
+                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                  <div class="flex max-w-lg rounded-md shadow-sm">
+                    <input type="text" name="observerName" id="observerName" autocomplete="observerName" class="block w-full min-w-0 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="roomID" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Room ID</label>
+                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                  <div class="flex max-w-lg rounded-md shadow-sm">
+                    <input required type="text" name="roomID" id="roomID" autocomplete="roomID" class="block w-full min-w-0 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="cageID" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Cage ID</label>
+                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                  <div class="flex max-w-lg rounded-md shadow-sm">
+                    <input required type="text" name="cageID" id="cageID" autocomplete="cageID" class="block w-full min-w-0 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="mouseID" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Mouse ID</label>
+                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                  <div class="flex max-w-lg rounded-md shadow-sm">
+                    <input required type="text" name="mouseID" id="mouseID" autocomplete="mouseID" class="block w-full min-w-0 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Images <span class="text-gray-400">(Max 3)</span></label>
+                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                  <div class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                    <div class="space-y-1 text-center">
+                      <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <div class="flex text-sm text-gray-600">
+                        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                          <span>Upload files</span>
+                          <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple="multiple" required>
+                        </label>
+                        <p class="pl-1">or drag and drop</p>
+                      </div>
+                      <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="palpationScore" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Palpation Score <span class="text-gray-400">(Optional)</span></label>
+                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                  <div class="flex max-w-lg rounded-md shadow-sm">
+                    <input type="text" name="palpationScore" id="palpationScore" autocomplete="palpationScore" class="block w-full min-w-0 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="pt-5">
+            <div class="flex justify-end gap-x-3">
+              <button id="submit" type="submit" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+    `
+
+export function predict(event) {
+
+    const submitButton = document.getElementById('submit')
+    submitButton.innerText = 'Processing...'
+    submitButton.classList.toggle('cursor-not-allowed')
+    
+    event.preventDefault()
+    
+    var requestOptions = {
+        method: 'POST',
+        body: new FormData(event.target),
+        redirect: 'follow'
+    }
+
+    console.log(requestOptions)
+    
+    // document.getElementById('form').classList.toggle('hide')
+    // document.getElementById('predicting').classList.toggle('hide')
+    
+    // fetch("https://mousemapp.azurewebsites.net/api/predict?code=72zqkChgmomeOZmmwH_-wT1fg6nxykamnJTExzALnKccAzFufDWatg==", requestOptions)
+    //   .then(response => response.json())
+    //   .then(result => {
+    
+    //     const resultScore = document.getElementById('result-score')
+    
+    //     resultScore.textContent = result.bcs
+    //     resultScore.classList.remove(...resultScore.classList)
+    //     resultScore.classList.add(`grade-${result.bcs}`)
+    
+    //     document.getElementById('result-name').textContent = result.name
+    //     document.getElementById('result-room').textContent = result.room
+    //     document.getElementById('result-cage').textContent = result.cage
+    //     document.getElementById('result-mouseID').textContent = result.mouseID
+    //     document.getElementById('result-file').textContent = result.files[0].filename
+    
+    //     document.getElementById('predicting').classList.toggle('hide')
+    //     document.getElementById('result').classList.toggle('hide')
+    //   })
+    //   .catch(error => Sentry.captureException(error))
+}
