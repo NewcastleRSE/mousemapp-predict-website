@@ -2,6 +2,7 @@ import './style.css'
 import * as Sentry from "@sentry/browser";
 import { BrowserTracing } from "@sentry/tracing";
 import { form, predict } from './js/form'
+import { results } from './js/results';
 import { bcsGuide, imageGuide } from './js/guide'
 import mice from './images/mice.jpg'
 
@@ -37,6 +38,20 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
+const result = {
+  observerName: "",
+  roomID: "1234",
+  cageID: "1234",
+  mouseID: "1234",
+  palpationScore: "",
+  files: [{
+    filename: "grey_8_BCS5.jpg",
+    mimeType: "image/jpeg",
+    bcs: "4"
+  }], 
+  bcs: 4.0
+}
+
 document.getElementById('content').innerHTML = form
 
 document.getElementById('form').addEventListener('submit', predict)
@@ -46,7 +61,11 @@ document.getElementById('bcsGuideLink').addEventListener('click', () => {
 })
 
 document.getElementById('imageGuideLink').addEventListener('click', () => {
-  document.getElementById('content').innerHTML = bcsGuide
+  document.getElementById('content').innerHTML = imageGuide
+})
+
+document.getElementById('return').addEventListener('click', () => {
+  document.getElementById('content').innerHTML = form
 })
 
 if(location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
