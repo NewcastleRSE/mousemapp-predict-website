@@ -1,5 +1,8 @@
 import './style.css'
+import * as Sentry from "@sentry/browser";
+import { BrowserTracing } from "@sentry/tracing";
 import { form, predict } from './js/form'
+import { bcsGuide, imageGuide } from './js/guide'
 import mice from './images/mice.jpg'
 
 document.querySelector('#app').innerHTML = `
@@ -37,3 +40,20 @@ document.querySelector('#app').innerHTML = `
 document.getElementById('content').innerHTML = form
 
 document.getElementById('form').addEventListener('submit', predict)
+
+document.getElementById('bcsGuideLink').addEventListener('click', () => {
+  document.getElementById('content').innerHTML = bcsGuide
+})
+
+document.getElementById('imageGuideLink').addEventListener('click', () => {
+  document.getElementById('content').innerHTML = bcsGuide
+})
+
+if(location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+  Sentry.init({
+    dsn: "https://b09b80983a54445bbfa01657e146178a@o1080315.ingest.sentry.io/4504660631879680",
+    integrations: [new BrowserTracing()],
+    environment: 'Production',
+    tracesSampleRate: 1.0,
+  })
+}

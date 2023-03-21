@@ -1,3 +1,5 @@
+import { results } from "./results"
+
 export const form = `
         <form id="form" class="space-y-8 divide-y divide-gray-200">
           <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -6,9 +8,25 @@ export const form = `
                 <h3 class="text-base font-semibold leading-6 text-gray-900">Instructions</h3>
                 <p class="mt-2 text-sm text-gray-500">For each mouse enter your Name, Holding room ID, Cage ID & Mouse ID into the boxed below. You are able to upload up to three images of each mouse, with the system displaying an average score across all of the images uploaded.</p>
                 <p class="mt-2 text-sm text-gray-500">If you are able to add a score form manual palpation for the mouse, we can further develop the system & increase the accuracy.</p>
-                <p class="mt-2 text-sm text-gray-500">For further information on Body Condition Score (BCS) method please see: BCS Guide</p>
-                <p class="mt-2 text-sm text-gray-500">For detailed instructions for how to take optimal images please see: Image Guide</p>
+                <p class="mt-2 text-sm text-gray-500">For further information on Body Condition Score (BCS) method please see: <span id="bcsGuideLink" class="text-indigo-600 font-bold cursor-pointer">BCS Guide</span></p>
+                <p class="mt-2 text-sm text-gray-500">For detailed instructions for how to take optimal images please see: <span id="imageGuideLink" class="text-indigo-600 font-bold cursor-pointer">Image Guide</span></p>
               </div>
+
+            <div id="errorMessage" class="hidden rounded-md bg-red-50 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-sm font-medium text-red-800">There was an error with your submission</h3>
+                  <div class="mt-2 text-sm text-red-700">
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="space-y-6 sm:space-y-5">
               <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -82,11 +100,11 @@ export const form = `
           <div class="pt-5">
             <div class="flex justify-end gap-x-3">
               <button id="submit" type="submit" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150">
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Submit
+                <span>Submit</span>
               </button>
             </div>
           </div>
@@ -94,12 +112,10 @@ export const form = `
     `
 
 export function predict(event) {
-
-    const submitButton = document.getElementById('submit')
-    submitButton.innerText = 'Processing...'
-    submitButton.classList.toggle('cursor-not-allowed')
     
     event.preventDefault()
+
+    toggleLoadingButton()
     
     var requestOptions = {
         method: 'POST',
@@ -107,29 +123,40 @@ export function predict(event) {
         redirect: 'follow'
     }
 
-    console.log(requestOptions)
+    let status = null
     
-    // document.getElementById('form').classList.toggle('hide')
-    // document.getElementById('predicting').classList.toggle('hide')
+    fetch("https://mousemapp.azurewebsites.net/api/predict?code=72zqkChgmomeOZmmwH_-wT1fg6nxykamnJTExzALnKccAzFufDWatg==", requestOptions)
+      .then(response => {
+        status = response.status
+        return response.json()
+      })
+      .then(result => {
+        toggleLoadingButton()
+
+        if(status === 200) {
+          results(result)
+        }
+        else {
+          toggleErrorMessage(result.message)
+        }
+      })
+      .catch(error => {
+        throw new Error(error)
+      })
+}
+
+function toggleLoadingButton() {
+    const submitButton = document.getElementById('submit')
+    const processing = submitButton.getElementsByTagName('span')[0].innerText === 'Processing...'
+
+    submitButton.classList.toggle('cursor-not-allowed')
+    submitButton.getElementsByTagName('span')[0].innerText = processing ? 'Submit' : 'Processing...'
+    submitButton.getElementsByTagName('svg')[0].classList.toggle('hidden')
+}
+
+function toggleErrorMessage(message) {
+    const errorMessage = document.getElementById('errorMessage')
     
-    // fetch("https://mousemapp.azurewebsites.net/api/predict?code=72zqkChgmomeOZmmwH_-wT1fg6nxykamnJTExzALnKccAzFufDWatg==", requestOptions)
-    //   .then(response => response.json())
-    //   .then(result => {
-    
-    //     const resultScore = document.getElementById('result-score')
-    
-    //     resultScore.textContent = result.bcs
-    //     resultScore.classList.remove(...resultScore.classList)
-    //     resultScore.classList.add(`grade-${result.bcs}`)
-    
-    //     document.getElementById('result-name').textContent = result.name
-    //     document.getElementById('result-room').textContent = result.room
-    //     document.getElementById('result-cage').textContent = result.cage
-    //     document.getElementById('result-mouseID').textContent = result.mouseID
-    //     document.getElementById('result-file').textContent = result.files[0].filename
-    
-    //     document.getElementById('predicting').classList.toggle('hide')
-    //     document.getElementById('result').classList.toggle('hide')
-    //   })
-    //   .catch(error => Sentry.captureException(error))
+    errorMessage.getElementsByTagName('p')[0].innerText =message
+    errorMessage.classList.toggle('hidden')
 }
