@@ -95,7 +95,10 @@ bcsForm.querySelector('#form').addEventListener('submit', (event) => {
     bcsResults.innerHTML = results(result)
 
     bcsResults.querySelector('#return').addEventListener('click', () => {
-      document.getElementById('content').innerHTML = form
+      bcsForm.classList.remove('hidden')
+      bcsResults.classList.add('hidden')
+      imageGuide.classList.add('hidden')
+      bcsGuide.classList.add('hidden')
     })
     
     bcsForm.classList.add('hidden')
