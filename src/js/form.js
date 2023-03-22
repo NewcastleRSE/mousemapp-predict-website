@@ -67,7 +67,7 @@ export const form = `
                 <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Images <span class="text-gray-400">(Max 3)</span></label>
                 <div class="mt-2 sm:col-span-2 sm:mt-0">
                   <div class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-                    <div class="space-y-1 text-center">
+                    <div id="file-message" class="space-y-1 text-center">
                       <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
@@ -79,6 +79,8 @@ export const form = `
                         <p class="pl-1">or drag and drop</p>
                       </div>
                       <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    </div>
+                    <div id="file-list" class="hidden">
                     </div>
                   </div>
                 </div>
@@ -97,6 +99,9 @@ export const form = `
           </div>
           <div class="pt-5">
             <div class="flex justify-end gap-x-3">
+              <button id="form-reset" type="button" class="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                Reset
+              </button>
               <button id="submit" type="submit" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150">
                 <svg class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -120,6 +125,8 @@ export async function predict(event) {
         body: new FormData(event.target),
         redirect: 'follow'
     }
+
+    console.log(requestOptions.body)
 
     let status = null
     

@@ -78,6 +78,35 @@ bcsForm.querySelector('#bcsGuideLink').addEventListener('click', () => {
   bcsGuide.classList.remove('hidden')
 })
 
+bcsForm.querySelector('#form-reset').addEventListener('click', () => {
+  bcsForm.querySelector('#file-list').innerHTML = ''
+
+  bcsForm.querySelector('#file-message').classList.remove('hidden')
+  bcsForm.querySelector('#file-list').classList.add('hidden')
+
+  bcsForm.querySelector('#form').reset()
+})
+
+bcsForm.querySelector('#file-upload').addEventListener('change', () => {
+  console.log(bcsForm.querySelector('#file-upload').files)
+
+  let fileList = '',
+      fileCount = bcsForm.querySelector('#file-upload').files.length < 4 ? bcsForm.querySelector('#file-upload').files.length : 3
+
+  for (let i = 0; i < fileCount; i++) {
+    
+    fileList += `
+      <span class="inline-flex items-center rounded-full bg-indigo-100 py-0.5 px-2.5 mb-2.5 text-sm font-medium text-indigo-700">
+        ${bcsForm.querySelector('#file-upload').files[i].name}
+      </span>`
+  }
+
+  bcsForm.querySelector('#file-list').innerHTML = fileList
+
+  bcsForm.querySelector('#file-message').classList.add('hidden')
+  bcsForm.querySelector('#file-list').classList.remove('hidden')
+})
+
 bcsForm.querySelector('#form').addEventListener('submit', (event) => {
   
   event.preventDefault()
