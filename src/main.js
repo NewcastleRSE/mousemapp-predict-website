@@ -79,18 +79,30 @@ bcsForm.querySelector('#bcsGuideLink').addEventListener('click', () => {
 })
 
 bcsForm.querySelector('#form').addEventListener('submit', (event) => {
+  
+  event.preventDefault()
+
+  const files = []
+
+  for (let i = 0; i < bcsForm.querySelector('#file-upload').files.length; i++) {
+    files.push(URL.createObjectURL(bcsForm.querySelector('#file-upload').files[i]))
+  }
+  
   predict(event).then(result => {
+
+    result.images = files
+
     bcsResults.innerHTML = results(result)
+
+    bcsResults.querySelector('#return').addEventListener('click', () => {
+      document.getElementById('content').innerHTML = form
+    })
     
     bcsForm.classList.add('hidden')
     bcsResults.classList.remove('hidden')
     imageGuide.classList.add('hidden')
     bcsGuide.classList.add('hidden')
   })
-})
-
-bcsResults.querySelector('#return').addEventListener('click', () => {
-  document.getElementById('content').innerHTML = form
 })
 
 if(location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
