@@ -3,7 +3,7 @@ import * as Sentry from "@sentry/browser";
 import { BrowserTracing } from "@sentry/tracing";
 import { form, predict } from './js/form'
 import { results } from './js/results';
-import { bcsGuide, imageGuide } from './js/guide'
+import { bcs, images } from './js/guide'
 import mice from './images/mice.jpg'
 
 document.querySelector('#app').innerHTML = `
@@ -32,7 +32,10 @@ document.querySelector('#app').innerHTML = `
         <h4 class="text-2xl tracking-tight text-white sm:text-4xl">An image classifier for the assessment of body condition (BCS) in mice</h4>
       </div>
       <div id="content" class="mx-auto max-w-4xl rounded-none rounded-t-lg bg-white p-10 mt-10 drop-shadow-lg">
-        
+        <div id="bcsForm" data-active="true"></div>
+        <div id="bcsResults" class="hidden"></div>
+        <div id="imageGuide" class="hidden"></div>
+        <div id="bcsGuide" class="hidden"></div>
       </div>
     </div>
   </div>
@@ -52,19 +55,41 @@ const result = {
   bcs: 4.0
 }
 
-document.getElementById('content').innerHTML = form
+const bcsForm = document.getElementById('bcsForm')
+const bcsResults = document.getElementById('bcsResults')
+const imageGuide = document.getElementById('imageGuide')
+const bcsGuide = document.getElementById('bcsGuide')
 
-document.getElementById('form').addEventListener('submit', predict)
+bcsForm.innerHTML = form
+imageGuide.innerHTML = images
+bcsGuide.innerHTML = bcs
 
-document.getElementById('bcsGuideLink').addEventListener('click', () => {
-  document.getElementById('content').innerHTML = bcsGuide
+bcsForm.querySelector('#imageGuideLink').addEventListener('click', () => {
+  bcsForm.classList.add('hidden')
+  bcsResults.classList.add('hidden')
+  imageGuide.classList.remove('hidden')
+  bcsGuide.classList.add('hidden')
 })
 
-document.getElementById('imageGuideLink').addEventListener('click', () => {
-  document.getElementById('content').innerHTML = imageGuide
+bcsForm.querySelector('#bcsGuideLink').addEventListener('click', () => {
+  bcsForm.classList.add('hidden')
+  bcsResults.classList.add('hidden')
+  imageGuide.classList.add('hidden')
+  bcsGuide.classList.remove('hidden')
 })
 
-document.getElementById('return').addEventListener('click', () => {
+bcsForm.querySelector('#form').addEventListener('submit', (event) => {
+  predict(event).then(result => {
+    bcsResults.innerHTML = results(result)
+    
+    bcsForm.classList.add('hidden')
+    bcsResults.classList.remove('hidden')
+    imageGuide.classList.add('hidden')
+    bcsGuide.classList.add('hidden')
+  })
+})
+
+bcsResults.querySelector('#return').addEventListener('click', () => {
   document.getElementById('content').innerHTML = form
 })
 
