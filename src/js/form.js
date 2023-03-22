@@ -1,5 +1,3 @@
-import { results } from "./results"
-
 export const form = `
         <form id="form" class="space-y-8 divide-y divide-gray-200">
           <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -111,7 +109,7 @@ export const form = `
         </form>
     `
 
-export function predict(event) {
+export async function predict(event) {
     
     event.preventDefault()
 
@@ -125,7 +123,7 @@ export function predict(event) {
 
     let status = null
     
-    fetch("https://mousemapp.azurewebsites.net/api/predict?code=72zqkChgmomeOZmmwH_-wT1fg6nxykamnJTExzALnKccAzFufDWatg==", requestOptions)
+    return fetch("https://mousemapp.azurewebsites.net/api/predict?code=72zqkChgmomeOZmmwH_-wT1fg6nxykamnJTExzALnKccAzFufDWatg==", requestOptions)
       .then(response => {
         status = response.status
         return response.json()
@@ -134,7 +132,7 @@ export function predict(event) {
         toggleLoadingButton()
 
         if(status === 200) {
-          results(result)
+          return result
         }
         else {
           toggleErrorMessage(result.message)

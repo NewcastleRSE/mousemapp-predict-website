@@ -1,7 +1,7 @@
-export const bcsGuide = `
+export const bcs = `
     BCS Guide
 `
 
-export const imageGuide = `
+export const images = `
     Image Guide
 `
