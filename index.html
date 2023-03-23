@@ -2,25 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/images/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-fe321177.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MouseMApp</title>
+    <script type="module" crossorigin src="/assets/index-1b40cdd8.js"></script>
+    <link rel="stylesheet" href="/assets/index-3d72f3fc.css">
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    
   </body>
-  <script type="module">
-    // Only catch errors in production
-    if (window.location.hostname === "htandme.co.uk") {
-        Sentry.init({
-            dsn: "https://b09b80983a54445bbfa01657e146178a@o1080315.ingest.sentry.io/4504660631879680",
-            // Set tracesSampleRate to 1.0 to capture 100%
-            // of transactions for performance monitoring.
-            // We recommend adjusting this value in production
-            tracesSampleRate: 1.0,
-            environment: 'Production'
-        })
-    }
-</script>
+  
 </html>
