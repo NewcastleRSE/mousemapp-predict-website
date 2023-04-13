@@ -23,20 +23,6 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
-const result = {
-  observerName: "",
-  roomID: "1234",
-  cageID: "1234",
-  mouseID: "1234",
-  palpationScore: "",
-  files: [{
-    filename: "grey_8_BCS5.jpg",
-    mimeType: "image/jpeg",
-    bcs: "4"
-  }], 
-  bcs: 4.0
-}
-
 const bcsForm = document.getElementById('bcsForm')
 const bcsResults = document.getElementById('bcsResults')
 const imageGuide = document.getElementById('imageGuide')
@@ -81,8 +67,6 @@ bcsForm.querySelector('#form-reset').addEventListener('click', () => {
 })
 
 bcsForm.querySelector('#file-upload').addEventListener('change', () => {
-  console.log(bcsForm.querySelector('#file-upload').files)
-
   let fileList = '',
       fileCount = bcsForm.querySelector('#file-upload').files.length < 4 ? bcsForm.querySelector('#file-upload').files.length : 3
 
@@ -111,22 +95,26 @@ bcsForm.querySelector('#form').addEventListener('submit', (event) => {
   }
   
   predict(event).then(result => {
+    if(result) {
+      result.images = files
 
-    result.images = files
-
-    bcsResults.innerHTML = results(result)
-
-    bcsResults.querySelector('#return').addEventListener('click', () => {
-      bcsForm.classList.remove('hidden')
-      bcsResults.classList.add('hidden')
+      bcsResults.innerHTML = results(result)
+  
+      bcsResults.querySelector('#return').addEventListener('click', () => {
+        bcsForm.classList.remove('hidden')
+        bcsResults.classList.add('hidden')
+        imageGuide.classList.add('hidden')
+        bcsGuide.classList.add('hidden')
+      })
+      
+      bcsForm.classList.add('hidden')
+      bcsResults.classList.remove('hidden')
       imageGuide.classList.add('hidden')
       bcsGuide.classList.add('hidden')
-    })
-    
-    bcsForm.classList.add('hidden')
-    bcsResults.classList.remove('hidden')
-    imageGuide.classList.add('hidden')
-    bcsGuide.classList.add('hidden')
+    } 
+  })
+  .catch(error => {
+    console.error(error)
   })
 })
 

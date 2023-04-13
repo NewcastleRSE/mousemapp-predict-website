@@ -20,7 +20,7 @@ export const form = `
                 <div class="ml-3">
                   <h3 class="text-sm font-medium text-red-800">There was an error with your submission</h3>
                   <div class="mt-2 text-sm text-red-700">
-                    <p></p>
+                    <ul class="ml-6 list-disc"></ul>
                   </div>
                 </div>
               </div>
@@ -119,14 +119,26 @@ export async function predict(event) {
     event.preventDefault()
 
     toggleLoadingButton()
-    
-    var requestOptions = {
-        method: 'POST',
-        body: new FormData(event.target),
-        redirect: 'follow'
+  
+    const data = new FormData(event.target)
+
+    let imageCount = 0
+
+    // Split into seperate form data tuples
+    for(const key of data.keys()) {
+      if (key === 'file-upload') {
+        data.append(`image${imageCount + 1}`, data.getAll(key)[imageCount])
+        imageCount++
+      }
     }
 
-    console.log(requestOptions.body)
+    data.delete('file-upload')
+
+    var requestOptions = {
+      method: 'POST',
+      body: data,
+      redirect: 'follow'
+  }
 
     let status = null
     
@@ -142,7 +154,9 @@ export async function predict(event) {
           return result
         }
         else {
-          toggleErrorMessage(result.message)
+          if(result.hasOwnProperty('errors')) {
+            toggleErrorMessage(result.errors)
+          }
         }
       })
       .catch(error => {
@@ -161,7 +175,13 @@ function toggleLoadingButton() {
 
 function toggleErrorMessage(message) {
     const errorMessage = document.getElementById('errorMessage')
+
+    let errorList = ''
+
+    for (const [key, value] of Object.entries(message)) {
+      errorList += `<li>${value}</li>`
+    }
     
-    errorMessage.getElementsByTagName('p')[0].innerText =message
+    errorMessage.getElementsByTagName('ul')[0].innerHTML = errorList
     errorMessage.classList.toggle('hidden')
 }

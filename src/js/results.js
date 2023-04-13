@@ -65,20 +65,20 @@ export function results(result) {
         </div>
     `
 
-    switch (result.bcs) {
-        case 1:
+    switch (true) {
+        case (result.bcs < 2):
             alert = highAlert
             break
-        case 2:
+        case (result.bcs < 3):
             alert = mediumAlert
             break
-        case 3:
+        case (result.bcs < 4):
             alert = lowAlert
             break
-        case 4:
+        case (result.bcs < 5):
             alert = mediumAlert
             break
-        case 5:
+        default:
             alert = highAlert
             break
     }
