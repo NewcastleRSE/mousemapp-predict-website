@@ -120,7 +120,7 @@ export async function predict(event) {
 
     toggleLoadingButton()
   
-    let data = new FormData(event.target)
+    const data = new FormData(event.target)
 
     let imageCount = 0
 
@@ -136,7 +136,7 @@ export async function predict(event) {
 
     var requestOptions = {
       method: 'POST',
-      body: new FormData(event.target),
+      body: data,
       redirect: 'follow'
   }
 
