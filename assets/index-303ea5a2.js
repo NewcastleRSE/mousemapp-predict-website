@@ -18,9 +18,8 @@ Url: ${Ft(e)}`),!0)}function cr(e,t){return!t||!t.length?!1:lr(e).some(n=>Kt(n,t
             <div class="space-y-6 sm:space-y-5">
               <div>
                 <h3 class="text-base font-semibold leading-6 text-gray-900">Instructions</h3>
-                <p class="mt-2 text-sm text-gray-500">For each mouse enter your Name, Holding room ID, Cage ID & Mouse ID into the boxed below. You are able to upload up to three images of each mouse, with the system displaying an average score across all of the images uploaded.</p>
-                <p class="mt-2 text-sm text-gray-500">If you are able to add a score form manual palpation for the mouse, we can further develop the system & increase the accuracy.</p>
-                <p class="mt-2 text-sm text-gray-500">For further information on Body Condition Score (BCS) method please see: <span id="bcsGuideLink" class="text-indigo-600 font-bold cursor-pointer">BCS Guide</span></p>
+                <p class="mt-2 text-sm text-gray-500">For each mouse enter your Name (optional), Holding room ID, Cage ID & Mouse ID into the boxes below. You can upload up to three images of each mouse, with the system displaying an average score across all of the images uploaded.</p>
+                <p class="mt-2 text-sm text-gray-500">If you can add a manual palpation score for the mouse (optional) that would help support further development of the system and increase the accuracy. Please see <span id="bcsGuideLink" class="text-indigo-600 font-bold cursor-pointer">BCS method guide</span> for further information.</p>
                 <p class="mt-2 text-sm text-gray-500">For detailed instructions for how to take optimal images please see: <span id="imageGuideLink" class="text-indigo-600 font-bold cursor-pointer">Image Guide</span></p>
               </div>
 
