@@ -67,21 +67,37 @@ bcsForm.querySelector('#form-reset').addEventListener('click', () => {
 })
 
 bcsForm.querySelector('#file-upload').addEventListener('change', () => {
-  let fileList = '',
-      fileCount = bcsForm.querySelector('#file-upload').files.length < 4 ? bcsForm.querySelector('#file-upload').files.length : 3
-
-  for (let i = 0; i < fileCount; i++) {
-    
-    fileList += `
-      <span class="inline-flex items-center rounded-full bg-indigo-100 py-0.5 px-2.5 mb-2.5 text-sm font-medium text-indigo-700">
-        ${bcsForm.querySelector('#file-upload').files[i].name}
-      </span>`
+  if(bcsForm.querySelector('#file-upload').files.length < 4) {
+    displaySelectedFiles(bcsForm.querySelector('#file-upload').files)
   }
+  else {
+    const files = []
+    files.push(bcsForm.querySelector('#file-upload').files.item(0))
+    files.push(bcsForm.querySelector('#file-upload').files.item(1))
+    files.push(bcsForm.querySelector('#file-upload').files.item(2))
+    displaySelectedFiles(files)
+  }
+})
 
-  bcsForm.querySelector('#file-list').innerHTML = fileList
+bcsForm.querySelector('#dropZone').addEventListener('dragstart', (event) => { event.preventDefault() })
+bcsForm.querySelector('#dropZone').addEventListener('dragenter', (event) => { event.preventDefault() })
+bcsForm.querySelector('#dropZone').addEventListener('dragover', (event) => { event.preventDefault() })
 
-  bcsForm.querySelector('#file-message').classList.add('hidden')
-  bcsForm.querySelector('#file-list').classList.remove('hidden')
+bcsForm.querySelector('#dropZone').addEventListener('drop', (event) => { 
+  event.preventDefault()
+
+  if(event.dataTransfer.files.length < 4) {
+    bcsForm.querySelector('#file-upload').files = event.dataTransfer.files
+    displaySelectedFiles(event.dataTransfer.files)
+  }
+  else {
+    const dT = new DataTransfer()
+    dT.items.add(evt.dataTransfer.files[0])
+    dT.items.add(evt.dataTransfer.files[1])
+    dT.items.add(evt.dataTransfer.files[2])
+    bcsForm.querySelector('#file-upload').files = dT.files
+    displaySelectedFiles(dT.files)
+  }
 })
 
 bcsForm.querySelector('#form').addEventListener('submit', (event) => {
@@ -125,4 +141,21 @@ if(location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     environment: 'Production',
     tracesSampleRate: 1.0,
   })
+}
+
+function displaySelectedFiles(files) {
+
+  let fileList = ''
+
+  for (let i = 0; i < files.length; i++) {  
+    fileList += `
+      <span class="inline-flex items-center rounded-full bg-indigo-100 py-0.5 px-2.5 mb-2.5 text-sm font-medium text-indigo-700">
+        ${files[i].name}
+      </span>`
+  }
+
+  bcsForm.querySelector('#file-list').innerHTML = fileList
+
+  // bcsForm.querySelector('#file-message').classList.add('hidden')
+  bcsForm.querySelector('#file-list').classList.remove('hidden')
 }
