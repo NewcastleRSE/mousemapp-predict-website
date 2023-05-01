@@ -64,7 +64,7 @@ export const form = `
 
               <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                 <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Images <span class="text-gray-400">(Max 3)</span></label>
-                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                <div id="dropZone" class="mt-2 sm:col-span-2 sm:mt-0">
                   <div class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                     <div id="file-message" class="space-y-1 text-center">
                       <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
