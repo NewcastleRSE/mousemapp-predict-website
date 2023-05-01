@@ -72,9 +72,9 @@ bcsForm.querySelector('#file-upload').addEventListener('change', () => {
   }
   else {
     const files = []
+    files.push(bcsForm.querySelector('#file-upload').files.item(0))
     files.push(bcsForm.querySelector('#file-upload').files.item(1))
     files.push(bcsForm.querySelector('#file-upload').files.item(2))
-    files.push(bcsForm.querySelector('#file-upload').files.item(3))
     displaySelectedFiles(files)
   }
 })
@@ -156,6 +156,6 @@ function displaySelectedFiles(files) {
 
   bcsForm.querySelector('#file-list').innerHTML = fileList
 
-  bcsForm.querySelector('#file-message').classList.add('hidden')
+  // bcsForm.querySelector('#file-message').classList.add('hidden')
   bcsForm.querySelector('#file-list').classList.remove('hidden')
 }
