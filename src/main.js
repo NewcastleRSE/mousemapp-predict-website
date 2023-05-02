@@ -134,6 +134,12 @@ bcsForm.querySelector('#form').addEventListener('submit', (event) => {
   })
 })
 
+document.addEventListener( 'click', function ( event ) {
+  if( event.target.id == 'download' ) {
+    downloadResults()
+  }
+})
+
 if(location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   Sentry.init({
     dsn: "https://b09b80983a54445bbfa01657e146178a@o1080315.ingest.sentry.io/4504660631879680",
@@ -141,6 +147,49 @@ if(location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     environment: 'Production',
     tracesSampleRate: 1.0,
   })
+}
+
+function downloadResults() {
+  let result = JSON.parse(window.localStorage.getItem('bcs'))
+
+  const rows = [
+    [
+      'observerName',
+      'roomID',
+      'cageID',
+      'mouseID',
+      'palpationScore',
+      'bcs',
+      'image1',
+      'image1bcs',
+      'image2',
+      'image2bcs',
+      'image3',
+      'image3bcs'
+    ],
+    [
+      result.observerName,
+      result.roomID,
+      result.cageID,
+      result.mouseID,
+      result.palpationScore,
+      result.bcs.toFixed(1),
+      result.files[0].filename,
+      result.files[0].bcs,
+      result.files[1].filename,
+      result.files[1].bcs,
+      result.files[2].filename,
+      result.files[2].bcs
+    ]
+  ]
+
+  let csvContent = rows.map(e => e.join(',')).join('\n')
+
+  var link = window.document.createElement('a')
+      link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent))
+      link.setAttribute('download', 'bcs_results.csv')
+      link.click()
+      link.remove()
 }
 
 function displaySelectedFiles(files) {
